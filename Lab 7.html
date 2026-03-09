@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+    <div id="scoreboard">
+        <h2 id="turn">Тоглогч 1-ийн ээлж</h2>
+        <p>Тоглогч 1: <span id="s1">0</span></p>
+        <p>Тоглогч 2: <span id="s2">0</span></p>
+    </div>
+
+    <hr>
+
+    <button onclick="random()">Санамсаргүй тоо</button>
+    <h2 id="result"></h2>
+    
+    <input type="text" id="check" />
+    <button onclick="shalgah()">Шалгах</button>
+
+    <script>
+        let num = 0;
+        let turn = 1;
+        let score1 = 0;
+        let score2 = 0;
+
+        function random() {
+            num = Math.floor(Math.random() * (20000 - 10000 + 1)) + 10000;
+            document.getElementById("result").innerHTML = num;
+            
+            setTimeout(function () {
+                document.getElementById("result").innerHTML = "";
+            }, 50);
+        }
+
+        function shalgah() {
+            let val = Number(document.getElementById("check").value);
+            
+            if (val == num && num !== 0) {
+                alert("Тоглогч " + turn + " зөв таалаа!");
+                if (turn === 1) score1++;
+                else score2++;
+            } else {
+                alert("Буруу байна! Зөв тоо: " + num);
+            }
+
+            document.getElementById("s1").innerHTML = score1;
+            document.getElementById("s2").innerHTML = score2;
+            
+            turn = 3 - turn;
+            
+            document.getElementById("turn").innerHTML = "Тоглогч " + turn + "-ийн ээлж";
+            document.getElementById("check").value = "";
+            num = 0;
+        }
+    </script>
+
+</body>
+</html>
