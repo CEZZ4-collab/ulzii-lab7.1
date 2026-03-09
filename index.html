@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <title>Шоо шидэх тоглоом</title>
+</head>
+<body>
+    <a href="Lab 7.html"><button>Нөгөө Хуудас</button></a>
+
+    <button id="btn">Дарах</button>
+    <h1 id="shooToo">0</h1>
+    <h3 id="lastScore">Өмнөх : 0</h3>
+    <img id="shooZurag" src="shoo1.jfif" width="100">
+
+    <script>
+        let zurag = document.getElementById("shooZurag");
+        let btn = document.getElementById("btn");
+        let too = document.getElementById("shooToo");
+        let lastScoreDisplay = document.getElementById("lastScore");
+
+        let sum = Number(localStorage.getItem("nemeh"))|| 0;
+        too.innerHTML = sum;
+        let count = 0;
+
+        let savedScore = localStorage.getItem("totalScore");
+        if (savedScore) {
+            lastScoreDisplay.innerHTML = "Өмнөх оноо: " + savedScore;
+        }
+
+        btn.addEventListener("click", function () {
+            if (count < 5) {
+                let randomToo = Math.floor(Math.random() * 6) + 1;
+                
+                sum += randomToo;
+                too.innerHTML = sum;
+            
+                
+                zurag.src = "shoo" + randomToo + ".jfif";
+                localStorage.setItem("nemeh",sum);
+                too.innerHTML= sum;
+                count++;
+
+                if (count == 5) {
+                    localStorage.setItem("totalScore", sum);
+                    btn.style.display = "none";
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
